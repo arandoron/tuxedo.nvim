@@ -5,6 +5,7 @@ local buf_id = nil
 
 local config_defaults = {
 	create_todo_file = true,
+	use_project_todo_file = true,
 	width_ratio = 0.95,
 	height_ratio = 0.80,
 }
@@ -56,7 +57,15 @@ function M.tuxedo()
 
 	vim.api.nvim_set_option_value("bufhidden", "wipe", { buf = buf_id })
 
-	vim.fn.termopen("tuxedo", {
+	local command
+
+	if M.config.use_project_todo_file == true then
+		command = { "tuxedo", todo_path }
+	else
+		command = "tuxedo"
+	end
+
+	vim.fn.termopen(command, {
 		on_exit = function(_, _, _)
 			if win_id and vim.api.nvim_win_is_valid(win_id) then
 				vim.api.nvim_win_close(win_id, true)
