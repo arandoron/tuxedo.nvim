@@ -58,13 +58,17 @@ function M.tuxedo()
 	vim.api.nvim_set_option_value("bufhidden", "wipe", { buf = buf_id })
 
 	local cmd = { "tuxedo" }
+	local env = {}
 
 	if M.config.use_project_todo_file == true then
 		table.insert(cmd, todo_path)
+		local done_path = root_dir .. "/done.txt"
+		env["DONE_FILE"] = done_path
 	end
 
 	vim.fn.jobstart(cmd, {
 		term = true,
+		env = env,
 		on_exit = function(_, _, _)
 			if win_id and vim.api.nvim_win_is_valid(win_id) then
 				vim.api.nvim_win_close(win_id, true)
