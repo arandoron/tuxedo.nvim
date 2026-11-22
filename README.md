@@ -37,11 +37,19 @@ Or run `require("tuxedo").tuxedo()`.
 ```lua
 require('tuxedo').setup {
 	create_todo_file = true,
+  use_local_todo_file = true,
 	width_ratio = 0.95,
 	height_ratio = 0.80,
 }
 ```
 
+## Fork Changes
+
+Changes from the original project:
+
+- add additional config parameter `use_local_todo_file` which allows the user to specify whether he
+  wants to use a project specific `todo.txt` file instead of using the global file as defined in the
+  environment variables
 
 ## ❤️ Contributing
 
@@ -54,4 +62,3 @@ There's more information in [CONTRIBUTING.md](CONTRIBUTING.md).
 Licensed under the MIT license ([LICENSE](LICENSE) or <https://opensource.org/licenses/MIT>).
 Unless you explicitly state otherwise, any contribution intentionally
 submitted for inclusion in this project by you, shall be licensed as above, without any additional terms or conditions.
-
