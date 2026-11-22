@@ -50,6 +50,7 @@ Changes from the original project:
 - add additional config parameter `use_local_todo_file` which allows the user to specify whether he
   wants to use a project specific `todo.txt` file instead of using the global file as defined in the
   environment variables
+- replace deprecated `vim.fn.termopen()` call with `vim.fn.jobstart()`
 
 ## ❤️ Contributing
 
