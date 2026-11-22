@@ -63,7 +63,8 @@ function M.tuxedo()
 		table.insert(cmd, todo_path)
 	end
 
-	vim.fn.termopen(cmd, {
+	vim.fn.jobstart(cmd, {
+		term = true,
 		on_exit = function(_, _, _)
 			if win_id and vim.api.nvim_win_is_valid(win_id) then
 				vim.api.nvim_win_close(win_id, true)
