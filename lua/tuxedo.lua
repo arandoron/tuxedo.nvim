@@ -21,7 +21,7 @@ function M.tuxedo()
 	local root_dir = vim.fs.root(0, { ".git" }) or vim.fn.getcwd()
 	local todo_path = root_dir .. "/todo.txt"
 
-	if vim.fn.filereadable(todo_path) == 0 and M.config.create_todo_file then
+	if vim.fn.filereadable(todo_path) == 0 and M.config.create_todo_file and M.config.use_project_todo_file then
 		vim.fn.writefile({}, todo_path)
 	end
 
@@ -57,15 +57,13 @@ function M.tuxedo()
 
 	vim.api.nvim_set_option_value("bufhidden", "wipe", { buf = buf_id })
 
-	local command
+	local cmd = { "tuxedo" }
 
 	if M.config.use_project_todo_file == true then
-		command = { "tuxedo", todo_path }
-	else
-		command = "tuxedo"
+		table.insert(cmd, todo_path)
 	end
 
-	vim.fn.termopen(command, {
+	vim.fn.termopen(cmd, {
 		on_exit = function(_, _, _)
 			if win_id and vim.api.nvim_win_is_valid(win_id) then
 				vim.api.nvim_win_close(win_id, true)
